@@ -25,7 +25,7 @@
     "client-side",
     "server-side-rendering"
   ],
-  "author": "Guillem Gelabert <gelabert.guillem+github@gmail.com>",
+  "author": "Guillem Gelabert <44653501+guillem-gelabert@users.noreply.github.com>",
   "license": "ISC",
   "description": "ESLint rule to enforce safe access to the window object in SSR environments",
   "repository": {
