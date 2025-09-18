@@ -1,0 +1,51 @@
+{
+  "name": "eslint-no-unsafe-window-access",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "vitest --globals",
+    "test:ci": "vitest --globals --run",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "type": "module",
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "window",
+    "ssr",
+    "nuxt",
+    "nextjs",
+    "vite",
+    "client-side",
+    "server-side-rendering"
+  ],
+  "author": "Guillem Gelabert <gelabert.guillem+github@gmail.com>",
+  "license": "ISC",
+  "description": "ESLint rule to enforce safe access to the window object in SSR environments",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guillem/eslint-no-unsafe-window-access.git"
+  },
+  "homepage": "https://github.com/guillem/eslint-no-unsafe-window-access#readme",
+  "bugs": {
+    "url": "https://github.com/guillem/eslint-no-unsafe-window-access/issues"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^8.44.0",
+    "mocha": "^11.7.2",
+    "typescript": "^5.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.5.1",
+    "@typescript-eslint/rule-tester": "^8.44.0",
+    "eslint": "^9.35.0",
+    "vitest": "^3.2.4"
+  }
+}
