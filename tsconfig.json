@@ -1,16 +1,18 @@
 {
-  "include": ["src/**/*"],
+  "include": ["src/*.ts"],
   "exclude": ["node_modules", "**/*.test.*", "**/*.spec.*"],
   "compilerOptions": {
     "rootDir": "./src",
     "outDir": "./lib",
-    "module": "nodenext",
+    "module": "NodeNext",
     "target": "es2020",
     "lib": ["es2020"],
     "strict": true,
     "skipLibCheck": true,
     "sourceMap": false,
     "declaration": false,
-    "declarationMap": false
+    "declarationMap": false,
+    "esModuleInterop": true,
+    "moduleResolution": "NodeNext"
   }
 }
