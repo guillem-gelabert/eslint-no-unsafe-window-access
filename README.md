@@ -166,6 +166,30 @@ In SSR environments, accessing `window` on the server causes `ReferenceError: wi
 3. **Supporting multiple frameworks** - Works with Nuxt, Next.js, Vite, and other SSR frameworks
 4. **Comprehensive detection** - Catches window access in functions, classes, ternaries, and more
 
+## Upcoming Features
+
+🚀 **Planned enhancements (prioritized):**
+
+### High Priority
+
+1. **Better error messages** - More descriptive error messages with suggested fixes
+2. **Document object support** - Extend rule to also check for unsafe `document` access
+3. **Auto-fix suggestions** - Provide automatic fixes for common unsafe patterns
+
+### Medium Priority
+
+4. **Global object detection** - Support for other browser globals like `navigator`, `location`, etc.
+5. **Custom guard patterns** - Allow configuration of additional client-side detection patterns
+6. **Framework-specific presets** - Pre-configured rules for popular SSR frameworks
+
+### Low Priority
+
+7. **Performance optimizations** - Faster rule execution for large codebases
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
 ## License
 
 ISC

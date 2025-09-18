@@ -31,11 +31,11 @@
   "description": "ESLint rule to enforce safe access to the window object in SSR environments",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guillem/eslint-no-unsafe-window-access.git"
+    "url": "https://github.com/guillem-gelabert/eslint-no-unsafe-window-access.git"
   },
-  "homepage": "https://github.com/guillem/eslint-no-unsafe-window-access#readme",
+  "homepage": "https://github.com/guillem-gelabert/eslint-no-unsafe-window-access#readme",
   "bugs": {
-    "url": "https://github.com/guillem/eslint-no-unsafe-window-access/issues"
+    "url": "https://github.com/guillem-gelabert/eslint-no-unsafe-window-access/issues"
   },
   "dependencies": {
     "@typescript-eslint/utils": "^8.44.0",
