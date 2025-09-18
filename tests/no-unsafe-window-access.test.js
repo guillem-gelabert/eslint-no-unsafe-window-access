@@ -1,5 +1,5 @@
 import { RuleTester } from "@typescript-eslint/rule-tester";
-import rule from "../lib/no-unsafe-window-access.js";
+import rule from "../src/no-unsafe-window-access.ts";
 
 const ruleTester = new RuleTester({
   languageOptions: {

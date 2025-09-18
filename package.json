@@ -2,7 +2,6 @@
   "name": "eslint-no-unsafe-window-access",
   "version": "1.0.0",
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
   "files": [
     "lib/",
     "README.md",
@@ -37,15 +36,23 @@
   "bugs": {
     "url": "https://github.com/guillem-gelabert/eslint-no-unsafe-window-access/issues"
   },
-  "dependencies": {
-    "@typescript-eslint/utils": "^8.44.0",
-    "mocha": "^11.7.2",
-    "typescript": "^5.9.2"
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
+    }
+  },
+  "peerDependencies": {
+    "eslint": "^8.56.0 || ^9.0.0"
   },
   "devDependencies": {
+    "@typescript-eslint/utils": "^8.44.0",
     "@types/node": "^24.5.1",
     "@typescript-eslint/rule-tester": "^8.44.0",
     "eslint": "^9.35.0",
-    "vitest": "^3.2.4"
+    "eslint-plugin-vue": "^10.4.0",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.44.0",
+    "vitest": "^3.2.4",
+    "vue-eslint-parser": "^10.2.0"
   }
 }
