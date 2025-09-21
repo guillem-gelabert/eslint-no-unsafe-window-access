@@ -32,6 +32,12 @@ ruleTester.run(
       {
         code: "if (typeof window === 'undefined') {console.log('no window')} else {console.log(window.document)}",
       },
+      {
+        code: "if (!window) {console.log(window)}",
+      },
+      {
+        code: "if (dog) {console.log(window)}",
+      },
 
       // Nuxt/Vite client checks
       {
@@ -91,7 +97,7 @@ ruleTester.run(
     invalid: [
       // Basic unsafe access
       {
-        code: "console.log(window)",
+        code: "console.log(window.something)",
         errors: 1,
       },
       {
@@ -105,7 +111,7 @@ ruleTester.run(
 
       // Wrong guard conditions
       {
-        code: "if (dog) {console.log(window)}",
+        code: "if (dog) {console.log(window.dog)}",
         errors: 1,
       },
       {
@@ -117,7 +123,7 @@ ruleTester.run(
         errors: 1,
       },
       {
-        code: "if (!window) {console.log(window)}",
+        code: "if (!window) {console.log(window.something)}",
         errors: 1,
       },
 

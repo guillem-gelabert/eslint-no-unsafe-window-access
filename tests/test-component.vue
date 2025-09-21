@@ -3,14 +3,7 @@
 </template>
 
 <script lang="ts">
-
-console.log(window)
-console.log(window.document)
-
-if (!!window) {
-  console.log(window.document)
-}
-
-console.test
-
+// You can use this file to locally test the rule during development.
+// run 'npm run build'
+// and then either 'npm run lint' or restart your vs code eslint server.
 </script>
