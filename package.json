@@ -11,7 +11,9 @@
     "test": "vitest --globals",
     "test:ci": "vitest --globals --run",
     "build": "tsc",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "lint": "cd tests && eslint .",
+    "lint:fix": "npm run eslint -- --fix"
   },
   "type": "module",
   "keywords": [
