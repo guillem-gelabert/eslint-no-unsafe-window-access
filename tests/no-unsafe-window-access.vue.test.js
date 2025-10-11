@@ -21,12 +21,20 @@ ruleTester.run("no-unsafe-window-access (vue)", rule, {
       code: `
 <template></template>
 <script setup lang="ts">
+console.log(window)
+</script>
+      `,
+    },
+    {
+      filename: "Component.vue",
+      code: `
+<template></template>
+<script setup lang="ts">
 if (import.meta.client) {
   console.log(window.document)
 }
 </script>
       `,
-      errors: 0,
     },
     {
       filename: "Component.vue",
@@ -42,7 +50,6 @@ export default {
 }
 </script>
       `,
-      errors: 0,
     },
   ],
   invalid: [
@@ -51,7 +58,7 @@ export default {
       code: `
 <template></template>
 <script setup lang="ts">
-console.log(window)
+console.log(window.document)
 </script>
       `,
       errors: 1,

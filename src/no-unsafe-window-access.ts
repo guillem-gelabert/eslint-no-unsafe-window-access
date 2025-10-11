@@ -29,9 +29,14 @@ const isWindowCheck = (node: TSESTree.Node): boolean => {
   if (node.type === AST_NODE_TYPES.Identifier && node.name === "window") {
     return true;
   }
+
   if (node.type === AST_NODE_TYPES.UnaryExpression && node.operator === "!") {
-    return isWindowCheck(node.argument);
+    const childNode = node.argument
+    if (childNode.type === AST_NODE_TYPES.UnaryExpression && childNode.operator === "!") {
+      return isWindowCheck(childNode.argument);
+    }
   }
+
   if (node.type === AST_NODE_TYPES.BinaryExpression) {
     return (
       (node.operator === "!==" || node.operator === "===") &&
@@ -45,11 +50,8 @@ const isWindowCheck = (node: TSESTree.Node): boolean => {
           node.right.argument.name === "window"))
     );
   }
-  return false;
-};
 
-const isWindow = (node: TSESTree.Identifier) => {
-  return node.name === "window";
+  return false;
 };
 
 const isClientGuard = (node: TSESTree.Node): boolean => {
@@ -73,11 +75,10 @@ const isClientGuard = (node: TSESTree.Node): boolean => {
 };
 
 const isInClientGuard = (
-  node: TSESTree.Node,
   ancestors: TSESTree.Node[]
 ): boolean => {
-  // Check if we're inside an if statement with client guard
   for (const ancestor of ancestors) {
+    // Check if we're inside an if statement with client guard
     if (ancestor.type === AST_NODE_TYPES.IfStatement) {
       if (isClientGuard(ancestor.test)) {
         return true;
@@ -127,10 +128,12 @@ const rule = createRule({
   defaultOptions: [],
   create(context) {
     return {
-      Identifier(node) {
-        if (isWindow(node)) {
+      // check for window.something
+      MemberExpression(node) {
+        if (node.object.type === AST_NODE_TYPES.Identifier &&
+              node.object.name === 'window') {
           const ancestors = context.sourceCode.getAncestors(node);
-          const isSafe = isInClientGuard(node, ancestors);
+          const isSafe = isInClientGuard(ancestors);
           if (!isSafe) {
             context.report({
               node,
@@ -139,6 +142,22 @@ const rule = createRule({
           }
         }
       },
+      // check for const { something } = window
+      Identifier(node) {
+        const parent = node.parent
+        if(parent.type === AST_NODE_TYPES.VariableDeclarator &&
+            parent.id.type === AST_NODE_TYPES.ObjectPattern &&
+            node.name === 'window') {
+          const ancestors = context.sourceCode.getAncestors(node);
+          const isSafe = isInClientGuard(ancestors);
+          if (!isSafe) {
+            context.report({
+              node,
+              messageId: "unsafeWindowAccess",
+            });
+          }
+        }
+      }
     };
   },
 });

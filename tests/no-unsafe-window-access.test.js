@@ -21,93 +21,83 @@ ruleTester.run(
     valid: [
       // Basic window checks
       {
-        code: "if (!window) {console.log(window)}",
-        errors: 0,
+        code: "if (!!window) {console.log(window)}",
       },
       {
         code: "if (window) {console.log(window.document)}",
-        errors: 0,
       },
       {
         code: "if (typeof window !== 'undefined') {console.log(window.document)}",
-        errors: 0,
       },
       {
         code: "if (typeof window === 'undefined') {console.log('no window')} else {console.log(window.document)}",
-        errors: 0,
+      },
+      {
+        code: "if (!window) {console.log(window)}",
+      },
+      {
+        code: "if (dog) {console.log(window)}",
       },
 
       // Nuxt/Vite client checks
       {
         code: "if (import.meta.client) {console.log(window.document)}",
-        errors: 0,
       },
       {
         code: "if (import.meta.client) {const doc = window.document; console.log(doc)}",
-        errors: 0,
       },
 
       // Process client checks
       {
         code: "if (process.client) {console.log(window.document)}",
-        errors: 0,
       },
       {
         code: "if (process.client) {const doc = window.document; console.log(doc)}",
-        errors: 0,
       },
 
       // Nested conditions
       {
         code: "if (import.meta.client) { if (someCondition) { console.log(window.document) } }",
-        errors: 0,
       },
       {
         code: "if (process.client) { if (someCondition) { console.log(window.document) } }",
-        errors: 0,
       },
 
       // Multiple window accesses in same guard
       {
         code: "if (import.meta.client) { console.log(window.document); console.log(window.location) }",
-        errors: 0,
       },
 
       // Function declarations with guards
       {
         code: "function getDoc() { if (import.meta.client) { return window.document } }",
-        errors: 0,
       },
 
       // Arrow functions with guards
       {
         code: "const getDoc = () => { if (process.client) { return window.document } }",
-        errors: 0,
       },
 
       // Ternary operators with guards
       {
         code: "const doc = import.meta.client ? window.document : null",
-        errors: 0,
       },
 
       // Logical AND with guards
       {
         code: "import.meta.client && console.log(window.document)",
-        errors: 0,
       },
 
       // Complex expressions
       {
         code: "if (import.meta.client && someCondition) { console.log(window.document) }",
-        errors: 0,
       },
     ],
     // 'invalid' checks cases that should not pass
     invalid: [
       // Basic unsafe access
       {
-        code: "console.log(window)",
+        code: "console.log(window.something)",
         errors: 1,
       },
       {
@@ -121,7 +111,7 @@ ruleTester.run(
 
       // Wrong guard conditions
       {
-        code: "if (dog) {console.log(window)}",
+        code: "if (dog) {console.log(window.dog)}",
         errors: 1,
       },
       {
@@ -130,6 +120,10 @@ ruleTester.run(
       },
       {
         code: "if (true) {console.log(window.document)}",
+        errors: 1,
+      },
+      {
+        code: "if (!window) {console.log(window.something)}",
         errors: 1,
       },
 

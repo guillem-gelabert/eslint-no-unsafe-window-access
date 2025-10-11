@@ -186,6 +186,10 @@ In SSR environments, accessing `window` on the server causes `ReferenceError: wi
 
 7. **Performance optimizations** - Faster rule execution for large codebases
 
+## Development
+
+You can use https://explorer.eslint.org to easily eyplore the AST of elsint.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
